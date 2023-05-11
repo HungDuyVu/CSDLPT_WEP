@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>NodeJS Basic</title>
+     <link rel="stylesheet" href="/css/style.css">
+     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+   
+     <div class="topnav">
+          <a class="active" href="/">Home</a>
+          <a href="/upload">Updoad file</a>
+     </div>
+        
+     <div>
+          <div class="w3-container">
+               <h2>List user:</h2>
+             
+               <table class="w3-table-all w3-hoverable">
+                 <thead>
+                   <tr class="w3-light-grey">
+                         <th>Mã dịch vụ</th>
+                         <th>Tên dịch vụ</th>
+                         <th>Giá dịch vụ</th>
+                         <th>Actions</th>
+                   </tr>
+                 </thead>
+                 <tbody>     
+
+                    <% for(let i=0; i < dataUser.length; i++) { %>
+                         <tr>
+                              <td>
+                                   <%= dataUser[i].maDV %>
+                              </td>
+                              <td>
+                                   <%= dataUser[i].tenDV %>
+                              </td>
+                              <td>
+                                   <%= dataUser[i].giaDV %>
+                              </td>
+                              <td style="display: flex; gap: 15px;">
+                                   <form>
+                                       <a class="btn-detail" href="/detail/user/<%= dataUser[i].maDV %>"
+                                           target="_blank">Detail</a>
+                                   </form>
+                                   <form action="/edit-user/<%= dataUser[i].maDV %>" method="GET">
+                                       <button type="submit">Edit</button>
+                                   </form>
+                                   <form action="/delete-user" method="POST">
+                                       <input type="text" hidden value="<%= dataUser[i].maDV %>" name="userId" />
+                                       <button type="submit">Delete</button>
+                                   </form>
+                               </td>
+                         </tr>
+                      <% } %>
+                 </tbody>
+               </table>
+          </div>
+          <div class="create-user-container">
+               <form action="/create-new-user" method="POST">
+                    <div><b>Tạo mới dịch vụ:</b> </div>
+                    <div>
+                         <label for="">Mã dịch vụ:</label>
+                         <input type="text" name="maDV">
+                    </div>
+                    <div>
+                         <label for="">Tên dịch vụ:</label>
+                         <input type="text" name="tenDV">
+                    </div>
+                    <div>
+                         <label for="">Giá dịch vụ:</label>
+                         <input type="text" name="giaDV">
+                    </div>
+                    <!-- <div>
+                         <label for="">Address:</label>
+                         <input type="text" name="address">
+                    </div> -->
+                    <div>
+                         <button type="buttom" class="btn-submit">Submit</button>
+                    </div>
+               </form>
+          </div>
+     </div>
+</body>
+</html>
